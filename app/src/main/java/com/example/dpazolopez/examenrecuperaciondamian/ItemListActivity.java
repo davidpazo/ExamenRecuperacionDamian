@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.TextView;
 
 
 /**
@@ -95,4 +96,10 @@ public class ItemListActivity extends AppCompatActivity
             startActivity(detailIntent);
         }
     }
+    //Añadimos el metodo del boton para limpiar la pantalla en la activity
+    public void botonLimpiar(View view){
+                TextView textview = (TextView) findViewById(R.id.item_detail);
+                if (textview != null)
+                    textview.setText(" ");
+            }
 }

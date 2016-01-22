@@ -15,7 +15,7 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:onClick="botonLimpiar"
         android:text="limpiar" />
