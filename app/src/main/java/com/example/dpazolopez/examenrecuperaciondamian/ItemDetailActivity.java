@@ -79,4 +79,12 @@ public class ItemDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    //Método del boton Limpiar del DetailActivity. Hacemos un intent para iniciar la activity de la lista
+        public void botonLimpiar(View view){
+            Intent intent = new Intent(ItemDetailActivity.this, ItemListActivity.class);
+            String mensaje = "Limpiado";
+            intent.putExtra("mensaje", mensaje);
+            startActivity(intent);
+
+        }
 }
