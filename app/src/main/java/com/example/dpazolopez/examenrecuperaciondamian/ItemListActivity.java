@@ -76,8 +76,14 @@ public class ItemListActivity extends AppCompatActivity
      * Callback method from {@link ItemListFragment.Callbacks}
      * indicating that the item with the given ID was selected.
      */
+    //Al cerrar la activity del detalle, lanza este metodo y diferenciamos los intents con la variable
+    // REQUESTCODE que recoje del metodo startActivityForResult()
     @Override
     public void onItemSelected(String id) {
+        boolean dualpane = getResources().getBoolean(R.bool.dual_pane);
+        if (dualpane) {
+            Toast.makeText(ItemListActivity.this, "Tumbado", Toast.LENGTH_SHORT).show();
+        }
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
@@ -95,26 +101,30 @@ public class ItemListActivity extends AppCompatActivity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, ItemDetailActivity.class);
             detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
-            //Esperamos un dato de la otra activity
+            //se inicia otra activity de la que se espera que devuelva un dato.
+            // REQUEST CODE =1.
             startActivityForResult(detailIntent, 1);
         }
     }
-    //Añadimos el metodo del boton para limpiar la pantalla en la activity
-    public void botonLimpiar(View view){
-                TextView textview = (TextView) findViewById(R.id.item_detail);
-                if (textview != null)
-                    textview.setText(" ");
-            }
-    //Lanzamos este metodo cuando cerramos la activity del detalle
-        @Override
-        protected void onActivityResult(int requestCode, int resultCode, Intent intentData) {
-            //REQUEST CODE, RESULT_OK, dato enviado
 
-            if(requestCode == 1){
-               if(resultCode == Activity.RESULT_OK){
-                    String result = intentData.getStringExtra("resultado");
-                    Toast.makeText(ItemListActivity.this, result, Toast.LENGTH_SHORT).show();
-                }
+    //Añadimos el metodo del boton para limpiar la pantalla en la activity
+    public void botonLimpiar(View view) {
+        TextView textview = (TextView) findViewById(R.id.item_detail);
+        if (textview != null)
+            textview.setText(" ");
+    }
+
+    //Lanzamos este metodo cuando cerramos la activity del detalle
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intentData) {
+        //REQUEST CODE, RESULT_OK, dato enviado
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                String result = intentData.getStringExtra("resultado");
+                Toast.makeText(ItemListActivity.this, result, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
 }

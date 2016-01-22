@@ -82,7 +82,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     }
     //Método del boton Limpiar del DetailActivity. Hacemos un intent para iniciar la activity de la lista
         public void botonLimpiar(View view){
-
+            //Modificamos el intent para que devuelva el resultado.
             Intent intentResultado = new Intent();
             String result = "Activity cerrada";
             intentResultado.putExtra("resultado", result);
