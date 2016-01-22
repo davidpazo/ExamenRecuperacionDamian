@@ -1,5 +1,6 @@
 package com.example.dpazolopez.examenrecuperaciondamian;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -81,10 +82,18 @@ public class ItemDetailActivity extends AppCompatActivity {
     }
     //Método del boton Limpiar del DetailActivity. Hacemos un intent para iniciar la activity de la lista
         public void botonLimpiar(View view){
-            Intent intent = new Intent(ItemDetailActivity.this, ItemListActivity.class);
-            String mensaje = "Limpiado";
-            intent.putExtra("mensaje", mensaje);
-            startActivity(intent);
 
+            Intent intentResultado = new Intent();
+            String result = "Activity cerrada";
+            intentResultado.putExtra("resultado", result);
+            setResult(Activity.RESULT_OK, intentResultado);
+
+            finish();
+
+
+
+
+
+            }
         }
 }

@@ -1,5 +1,6 @@
 package com.example.dpazolopez.examenrecuperaciondamian;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -93,7 +95,8 @@ public class ItemListActivity extends AppCompatActivity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, ItemDetailActivity.class);
             detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
-            startActivity(detailIntent);
+            //Esperamos un dato de la otra activity
+            startActivityForResult(detailIntent, 1);
         }
     }
     //Añadimos el metodo del boton para limpiar la pantalla en la activity
@@ -102,4 +105,16 @@ public class ItemListActivity extends AppCompatActivity
                 if (textview != null)
                     textview.setText(" ");
             }
+    //Lanzamos este metodo cuando cerramos la activity del detalle
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent intentData) {
+            //REQUEST CODE, RESULT_OK, dato enviado
+
+            if(requestCode == 1){
+               if(resultCode == Activity.RESULT_OK){
+                    String result = intentData.getStringExtra("resultado");
+                    Toast.makeText(ItemListActivity.this, result, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
 }
